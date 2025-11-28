@@ -1,0 +1,17 @@
+.task-detail-page {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-detail-page h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.task-detail-page p {
+  color: #666;
+  line-height: 1.6;
+}
+
