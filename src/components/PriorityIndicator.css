@@ -1,0 +1,24 @@
+.priority-indicator {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: white;
+  text-transform: uppercase;
+}
+
+.priority-indicator.low {
+  background-color: #28a745;
+}
+
+.priority-indicator.medium {
+  background-color: #ffc107;
+}
+
+.priority-indicator.high {
+  background-color: #fd7e14;
+}
+
+.priority-indicator.urgent {
+  background-color: #dc3545;
+}

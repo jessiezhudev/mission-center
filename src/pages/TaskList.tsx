@@ -2,6 +2,9 @@ import { useTaskStore } from '../store/taskStore'
 import { TaskStatus, TaskPriority, TaskCategory } from '../types/task'
 import './TaskList.css'
 import { useNavigate } from 'react-router-dom'
+import StatusBadge from '../components/StatusBadge'
+import PriorityIndicator from '../components/PriorityIndicator'
+import CategoryTag from '../components/CategoryTag'
 
 export default function TaskList() {
   const { getFilteredTasks, filter, setFilter } = useTaskStore()
@@ -130,18 +133,12 @@ export default function TaskList() {
             >
               <div className="task-header">
                 <h3>{task.title}</h3>
-                <span className={`status-badge ${task.status}`}>
-                  {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
-                </span>
+                <StatusBadge status={task.status} />
               </div>
               <p className="task-description">{task.description}</p>
               <div className="task-meta">
-                <span className={`priority-badge ${task.priority}`}>
-                  {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-                </span>
-                <span className={`category-badge ${task.category}`}>
-                  {task.category.charAt(0).toUpperCase() + task.category.slice(1)}
-                </span>
+                <PriorityIndicator priority={task.priority} />
+                <CategoryTag category={task.category} />
                 {task.dueDate && (
                   <span className="due-date">
                     截止日期: {new Date(task.dueDate).toLocaleDateString()}

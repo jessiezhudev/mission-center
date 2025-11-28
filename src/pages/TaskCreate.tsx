@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTaskStore } from '../store/taskStore'
 import { TaskStatus, TaskPriority, TaskCategory } from '../types/task'
 import './TaskCreate.css'
+import DatePicker from '../components/DatePicker'
 
 interface FormError {
   title?: string
@@ -163,11 +164,8 @@ export default function TaskCreate() {
         </div>
         
         <div className="form-group">
-          <label htmlFor="dueDate">截止日期</label>
-          <input
-            type="date"
-            id="dueDate"
-            name="dueDate"
+          <DatePicker
+            label="截止日期"
             value={formData.dueDate}
             onChange={handleChange}
           />

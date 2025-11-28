@@ -1,0 +1,9 @@
+.category-tag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: #e9ecef;
+  color: #495057;
+  text-transform: capitalize;
+}

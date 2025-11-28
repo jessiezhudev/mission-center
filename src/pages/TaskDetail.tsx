@@ -3,6 +3,10 @@ import { useTaskStore } from '../store/taskStore'
 import { TaskStatus, TaskPriority, TaskCategory } from '../types/task'
 import { useState } from 'react'
 import './TaskDetail.css'
+import StatusBadge from '../components/StatusBadge'
+import PriorityIndicator from '../components/PriorityIndicator'
+import CategoryTag from '../components/CategoryTag'
+import ConfirmDialog from '../components/ConfirmDialog'
 
 export default function TaskDetail() {
   const { id } = useParams<{ id: string }>()
@@ -226,15 +230,9 @@ export default function TaskDetail() {
           </div>
           
           <div className="task-meta">
-            <span className={`status-badge ${task.status}`}>
-              {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
-            </span>
-            <span className={`priority-badge ${task.priority}`}>
-              {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-            </span>
-            <span className={`category-badge ${task.category}`}>
-              {task.category.charAt(0).toUpperCase() + task.category.slice(1)}
-            </span>
+            <StatusBadge status={task.status} />
+            <PriorityIndicator priority={task.priority} />
+            <CategoryTag category={task.category} />
             {task.dueDate && (
               <span className={`due-date ${isTaskExpired(task.dueDate) ? 'expired' : ''}`}>
                 截止日期: {new Date(task.dueDate).toLocaleDateString()}
@@ -311,16 +309,14 @@ export default function TaskDetail() {
       
       {/* 删除确认对话框 */}
       {showDeleteConfirm && (
-        <div className="confirm-dialog">
-          <div className="confirm-content">
-            <h3>确认删除</h3>
-            <p>您确定要删除这个任务吗？</p>
-            <div className="confirm-actions">
-              <button className="btn primary" onClick={handleDelete}>删除</button>
-              <button className="btn secondary" onClick={() => setShowDeleteConfirm(false)}>取消</button>
-            </div>
-          </div>
-        </div>
+        <ConfirmDialog
+          title="确认删除"
+          message="您确定要删除这个任务吗？"
+          onConfirm={handleDelete}
+          onCancel={() => setShowDeleteConfirm(false)}
+          confirmText="删除"
+          cancelText="取消"
+        />
       )}
     </div>
   )

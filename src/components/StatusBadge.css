@@ -1,0 +1,28 @@
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: white;
+  text-transform: capitalize;
+}
+
+.status-badge.todo {
+  background-color: #ffc107;
+}
+
+.status-badge.in_progress {
+  background-color: #007bff;
+}
+
+.status-badge.review {
+  background-color: #17a2b8;
+}
+
+.status-badge.done {
+  background-color: #28a745;
+}
+
+.status-badge.cancelled {
+  background-color: #dc3545;
+}
