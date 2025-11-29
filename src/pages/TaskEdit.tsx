@@ -1,10 +1,15 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useTaskStore } from '../store/taskStore'
 import { TaskStatus, TaskPriority, TaskCategory } from '../types/task'
-import './TaskCreate.css'
+import './TaskEdit.css'
 
-export default function TaskCreate() {
+export default function TaskEdit() {
+  const { id } = useParams<{ id: string }>()
+  const { tasks, updateTask } = useTaskStore()
+  const navigate = useNavigate()
+  const task = tasks.find(t => t.id === parseInt(id || '', 10))
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -17,8 +22,23 @@ export default function TaskCreate() {
     estimatedHours: ''
   })
   const [errors, setErrors] = useState({})
-  const { addTask } = useTaskStore()
-  const navigate = useNavigate()
+
+  // 初始化表单数据
+  useEffect(() => {
+    if (task) {
+      setFormData({
+        title: task.title,
+        description: task.description,
+        status: task.status,
+        priority: task.priority,
+        category: task.category,
+        dueDate: task.dueDate || '',
+        tags: task.tags ? task.tags.join(', ') : '',
+        assignee: task.assignee || '',
+        estimatedHours: task.estimatedHours ? task.estimatedHours.toString() : ''
+      })
+    }
+  }, [task])
 
   // 表单验证
   const validateForm = () => {
@@ -39,14 +59,16 @@ export default function TaskCreate() {
   // 处理表单提交
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (validateForm()) {
-      const taskData = {
+    if (validateForm() && task) {
+      const updatedTaskData = {
+        ...task,
         ...formData,
         tags: formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag),
-        estimatedHours: formData.estimatedHours ? Number(formData.estimatedHours) : undefined
+        estimatedHours: formData.estimatedHours ? Number(formData.estimatedHours) : undefined,
+        updatedAt: new Date().toISOString()
       }
-      addTask(taskData)
-      navigate('/')
+      updateTask(updatedTaskData)
+      navigate('/task/' + id)
     }
   }
 
@@ -56,9 +78,21 @@ export default function TaskCreate() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
+  if (!task) {
+    return (
+      <div className="task-edit-page">
+        <h2>编辑任务</h2>
+        <p className="task-not-found">任务未找到</p>
+        <button onClick={() => navigate('/')} className="back-to-list-btn">
+          返回任务列表
+        </button>
+      </div>
+    )
+  }
+
   return (
-    <div className="task-create-page">
-      <h2>新建任务</h2>
+    <div className="task-edit-page">
+      <h2>编辑任务</h2>
       <form onSubmit={handleSubmit} className="task-form">
         <div className="form-group">
           <label htmlFor="title">任务标题 <span className="required">*</span></label>
@@ -188,15 +222,14 @@ export default function TaskCreate() {
         </div>
 
         <div className="form-actions">
-          <button type="button" onClick={() => navigate('/')} className="cancel-btn">
+          <button type="button" onClick={() => navigate('/task/' + id)} className="cancel-btn">
             取消
           </button>
           <button type="submit" className="submit-btn">
-            创建任务
+            保存修改
           </button>
         </div>
       </form>
     </div>
   )
 }
-
