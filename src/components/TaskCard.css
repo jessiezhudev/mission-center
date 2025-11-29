@@ -1,0 +1,221 @@
+.task-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.task-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.task-card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.task-card__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-card__action-btn {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.task-card__action-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.task-card__action-btn--edit:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+}
+
+.task-card__action-btn--delete:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.task-card__content {
+  flex: 1;
+}
+
+.task-card__description {
+  font-size: 0.9375rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.task-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-card__detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.task-card__detail-item--overdue {
+  color: #e74c3c;
+}
+
+.task-card__detail-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.task-card__detail-icon {
+  margin-right: 0.25rem;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.task-card__status-badge,
+.task-card__priority-badge,
+.task-card__category-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.task-card__status-badge--todo {
+  background-color: #9b59b6;
+}
+
+.task-card__status-badge--in_progress {
+  background-color: #3498db;
+}
+
+.task-card__status-badge--review {
+  background-color: #f39c12;
+}
+
+.task-card__status-badge--done {
+  background-color: #2ecc71;
+}
+
+.task-card__status-badge--cancelled {
+  background-color: #95a5a6;
+}
+
+.task-card__priority-badge--low {
+  background-color: #2ecc71;
+}
+
+.task-card__priority-badge--medium {
+  background-color: #f39c12;
+}
+
+.task-card__priority-badge--high {
+  background-color: #e67e22;
+}
+
+.task-card__priority-badge--urgent {
+  background-color: #e74c3c;
+}
+
+.task-card__category-badge--work {
+  background-color: #3498db;
+}
+
+.task-card__category-badge--personal {
+  background-color: #9b59b6;
+}
+
+.task-card__category-badge--study {
+  background-color: #2ecc71;
+}
+
+.task-card__category-badge--health {
+  background-color: #e74c3c;
+}
+
+.task-card__category-badge--finance {
+  background-color: #f39c12;
+}
+
+.task-card__category-badge--other {
+  background-color: #95a5a6;
+}
+
+.task-card__due-date {
+  font-weight: 500;
+}
+
+.task-card__overdue-badge {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+
+.task-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-card__tag {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.task-card__footer {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  font-size: 0.8125rem;
+  color: #999;
+}
+
+.task-card__updated-at {
+  display: block;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .task-card__details {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

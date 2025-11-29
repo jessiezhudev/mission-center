@@ -1,0 +1,65 @@
+.confirm-dialog-message {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+/* 按钮基础样式 */
+.btn {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn--primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn--primary:hover {
+  background-color: #2980b9;
+}
+
+.btn--secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.btn--secondary:hover {
+  background-color: #bdbdbd;
+}
+
+.btn--danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn--danger:hover {
+  background-color: #c0392b;
+}
+
+.btn--default {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.btn--default:hover {
+  background-color: #e0e0e0;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
