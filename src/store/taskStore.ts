@@ -100,6 +100,47 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
       }
       return true
     })
+  },
+
+  getTaskCountByStatus: () => {
+    const { tasks } = get()
+    return tasks.reduce((counts, task) => {
+      counts[task.status] = (counts[task.status] || 0) + 1
+      return counts
+    }, {} as Record<TaskStatus, number>)
+  },
+
+  getTasksByPriority: () => {
+    const { tasks } = get()
+    return tasks.reduce((groups, task) => {
+      if (!groups[task.priority]) {
+        groups[task.priority] = []
+      }
+      groups[task.priority].push(task)
+      return groups
+    }, {} as Record<TaskPriority, Task[]>)
+  },
+
+  getTasksByCategory: () => {
+    const { tasks } = get()
+    return tasks.reduce((groups, task) => {
+      if (!groups[task.category]) {
+        groups[task.category] = []
+      }
+      groups[task.category].push(task)
+      return groups
+    }, {} as Record<TaskCategory, Task[]>)
+  },
+
+  getUpcomingTasks: () => {
+    const { tasks } = get()
+    const now = new Date()
+    const sevenDaysFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+    return tasks.filter(task => {
+      if (!task.dueDate) return false
+      const dueDate = new Date(task.dueDate)
+      return dueDate >= now && dueDate <= sevenDaysFromNow
+    })
   }
 }))
 
